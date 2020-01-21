@@ -21,22 +21,22 @@
                             <textInputTraits key="textInputTraits"/>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TaskCell" textLabel="HcQ-vf-Nj6" detailTextLabel="jIo-Hw-U1v" style="IBUITableViewCellStyleSubtitle" id="Ukx-Zh-fGt">
-                                <rect key="frame" x="0.0" y="72" width="414" height="55.5"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TaskCell" textLabel="qFS-tf-zyf" detailTextLabel="4Yz-bl-lNz" rowHeight="72" style="IBUITableViewCellStyleSubtitle" id="Ukx-Zh-fGt">
+                                <rect key="frame" x="0.0" y="72" width="414" height="72"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ukx-Zh-fGt" id="qhH-rh-kqo">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="55.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="72"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HcQ-vf-Nj6">
-                                            <rect key="frame" x="20" y="10" width="33.5" height="20.5"/>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qFS-tf-zyf">
+                                            <rect key="frame" x="20" y="16" width="33.5" height="20.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jIo-Hw-U1v">
-                                            <rect key="frame" x="20" y="31.5" width="44" height="14.5"/>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4Yz-bl-lNz">
+                                            <rect key="frame" x="20" y="39.5" width="44" height="14.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <nil key="textColor"/>
@@ -51,17 +51,32 @@
                             <outlet property="delegate" destination="v4O-Kp-OFe" id="Nxl-sv-iKh"/>
                         </connections>
                     </tableView>
+                    <toolbarItems>
+                        <barButtonItem title="Sort by title" id="s6D-wt-Y8h">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="Dls-Or-pGQ"/>
+                        <barButtonItem title="Sort by date/time " id="pUl-Yo-bA3">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </barButtonItem>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" id="ng3-1r-8G7">
                         <barButtonItem key="rightBarButtonItem" title="Add Task" id="OE5-Oz-CRg">
+                            <color key="tintColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <segue destination="9cf-Hw-TvV" kind="show" id="yxa-cm-nOd"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="searchbar" destination="dzz-09-cKS" id="irh-oj-FYv"/>
+                        <outlet property="tableview" destination="8vI-Jc-vzD" id="DPr-VH-ovx"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L2r-Bc-Z40" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1088.4057971014493" y="90.401785714285708"/>
+            <point key="canvasLocation" x="1086.9565217391305" y="90.401785714285708"/>
         </scene>
         <!--Add TaskVC-->
         <scene sceneID="n1t-1k-gG5">
@@ -72,47 +87,45 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="28" translatesAutoresizingMaskIntoConstraints="NO" id="KLa-l6-fWh">
-                                <rect key="frame" x="57" y="186" width="201.5" height="203"/>
+                                <rect key="frame" x="57" y="186" width="201.5" height="171"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZVG-Gt-BmL">
-                                        <rect key="frame" x="0.0" y="0.0" width="201.5" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="201.5" height="22"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="enter title for your task" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="r6Z-ly-Js5">
-                                        <rect key="frame" x="0.0" y="58" width="201.5" height="29.5"/>
+                                        <rect key="frame" x="0.0" y="50" width="201.5" height="21.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Allow number of days:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FXT-2y-doU">
-                                        <rect key="frame" x="0.0" y="115.5" width="201.5" height="30"/>
+                                        <rect key="frame" x="0.0" y="99.5" width="201.5" height="22"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="enter number of days" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JC5-ZX-bUR">
-                                        <rect key="frame" x="0.0" y="173.5" width="201.5" height="29.5"/>
+                                        <rect key="frame" x="0.0" y="149.5" width="201.5" height="21.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="290" id="dDe-Gk-6ya"/>
-                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="75H-Tp-xNG" firstAttribute="trailing" secondItem="KLa-l6-fWh" secondAttribute="trailing" constant="155.5" id="L77-W1-WJH"/>
-                            <constraint firstItem="KLa-l6-fWh" firstAttribute="top" secondItem="75H-Tp-xNG" secondAttribute="top" constant="98" id="VIx-FA-Chw"/>
-                            <constraint firstItem="75H-Tp-xNG" firstAttribute="bottom" secondItem="KLa-l6-fWh" secondAttribute="bottom" constant="473" id="bIf-iL-v7K"/>
-                            <constraint firstItem="KLa-l6-fWh" firstAttribute="leading" secondItem="75H-Tp-xNG" secondAttribute="leading" constant="57" id="hia-ud-xYC"/>
+                            <constraint firstItem="75H-Tp-xNG" firstAttribute="bottom" secondItem="KLa-l6-fWh" secondAttribute="bottom" constant="456" id="7Mr-XU-nI0"/>
+                            <constraint firstItem="75H-Tp-xNG" firstAttribute="trailing" secondItem="KLa-l6-fWh" secondAttribute="trailing" constant="155.5" id="UUO-WW-dfM"/>
+                            <constraint firstItem="KLa-l6-fWh" firstAttribute="leading" secondItem="75H-Tp-xNG" secondAttribute="leading" constant="57" id="oED-lh-Nk5"/>
+                            <constraint firstItem="KLa-l6-fWh" firstAttribute="top" secondItem="75H-Tp-xNG" secondAttribute="top" constant="98" id="ypR-xc-qTM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="75H-Tp-xNG"/>
                     </view>
                     <navigationItem key="navigationItem" id="DHe-8C-uag">
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="bwa-Sw-8fh">
+                            <color key="tintColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="addTask:" destination="9cf-Hw-TvV" id="8yx-ke-1XP"/>
                             </connections>
@@ -130,13 +143,19 @@
         <!--Navigation Controller-->
         <scene sceneID="aT3-So-MWn">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="d30-Ee-rID" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="d30-Ee-rID" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="PNu-pR-jnq">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="eIU-fB-dQg">
+                        <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </toolbar>
                     <connections>
                         <segue destination="v4O-Kp-OFe" kind="relationship" relationship="rootViewController" id="36g-2m-Lfr"/>
                     </connections>

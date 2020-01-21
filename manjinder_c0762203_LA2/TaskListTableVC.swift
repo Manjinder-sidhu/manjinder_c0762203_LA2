@@ -7,14 +7,28 @@
 //
 
 import UIKit
+import CoreData
 
-class TaskListTableVC: UITableViewController {
+class TaskListTableVC: UITableViewController, UISearchBarDelegate {
 
     
+     var filteredData: [Task]?
+    
+    @IBOutlet weak var searchbar: UISearchBar!
+    
+    @IBOutlet var tableview: UITableView!
+    
+    @IBOutlet weak var completed: UIButton!
+    
+    var isImportant = false
     var tasks : [Task]?
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+      
+       LoadCoreData()
+//          filteredData = tasks
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -38,36 +52,93 @@ class TaskListTableVC: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
        
         let task = tasks![indexPath.row]
-               let cell = tableView.dequeueReusableCell(withIdentifier:"TaskCell")
+     let cell = tableView.dequeueReusableCell(withIdentifier:"TaskCell")
         cell?.textLabel?.text = task.title
-               cell?.detailTextLabel?.text = "\(task.days) days "
+        cell?.detailTextLabel?.text = "\(task.days) days "
         // Configure the cell...
 
+        print("\(tasks!.count)######")
+//
+//        cell.settask(at: indexPath,task: [(tasks?[indexPath.row])!])
+       
         return cell!
     }
-  
-    override func viewWillAppear(_ animated: Bool) {
-        self.tableView.reloadData()
-    }
-    /*
+    
+    
+   
+//    override func viewWillAppear(_ animated: Bool) {
+//        self.tableView.reloadData()
+//    }
+   
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
-    */
+  
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let Addaction = UITableViewRowAction(style: .normal, title: "Add Day") { (rowaction, indexPath) in
+            print("addDay clicked")
+            self.addDay()
+        }
+        Addaction.backgroundColor = UIColor.green
+        
+        
+        let deleteaction = UITableViewRowAction(style: .normal, title: "Delete") { (rowaction, indexPath) in
+                   print("delete  btn clicked")
+            let A_task = self.tasks![indexPath.row] as? NSManagedObject
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
-    /*
+                             // context
+            let ManagedContext = appDelegate.persistentContainer.viewContext
+            
+          
+             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TaskModal")
+//               fetchRequest.returnsObjectsAsFaults = false
+            do{
+                     let results = try ManagedContext.fetch(fetchRequest)
+                    let objectToDelete = results[indexPath.row] as? NSManagedObject
+                
+                self.tasks?.remove(at: indexPath.row)
+                ManagedContext.delete(objectToDelete!)
+                tableView.reloadData()
+//                for managedObjects in results{
+//                    if let managedObjectsData = managedObjects as? NSManagedObject{
+
+               
+                do {
+                    try ManagedContext.save();
+                  
+                } catch {
+                    print(error)
+                    // Error occured while deleting objects
+                }
+
+        }
+            
+            catch{
+                print(error)
+            }
+           
+
+        }
+    
+       
+              
+        return [Addaction,deleteaction]
+    }
+
+    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
+        if editingStyle == .delete{
             tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
+        else if editingStyle == .insert{
+            
+        }
     }
-    */
+
 
     /*
     // Override to support rearranging the table view.
@@ -84,14 +155,106 @@ class TaskListTableVC: UITableViewController {
     }
     */
 
-    /*
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        if let detailview = segue.destination as? AddTaskVC{
+            detailview.delegate = self
+            detailview.tasks = tasks
+        }
     }
-    */
+    
+    
+    func updateArray(taskArray:[Task]){
+        self.tasks = taskArray
+        tableview.reloadData()
+    }
 
+    
+     func LoadCoreData(){
+
+           tasks = [Task]()
+           //create an instance of app delegate
+                  let appDelegate = UIApplication.shared.delegate as! AppDelegate
+
+                  // context
+                  let ManagedContext = appDelegate.persistentContainer.viewContext
+
+           let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TaskModal")
+
+           do{
+               let results = try ManagedContext.fetch(fetchRequest)
+               if results is [NSManagedObject]{
+                   for result in results as! [NSManagedObject]{
+                       let title = result.value(forKey:"title") as! String
+
+                       let days = result.value(forKey: "days") as! Int
+
+
+                       tasks?.append(Task(title: title, days: days))
+
+                   }
+               }
+           } catch{
+               print(error)
+           }
+           print("\(tasks!.count )@@@@@@@@@@@@@")
+         
+       }
+    
+    
+    
+    
+    func addDay(){
+        
+        let alertcontroller = UIAlertController(title: "Add Day", message: "Enter a day for this task", preferredStyle: .alert)
+               
+               alertcontroller.addTextField { (textField ) in
+                               textField.placeholder = "number of days"
+                   textField.text = ""
+               }
+               let CancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+               CancelAction.setValue(UIColor.brown, forKey: "titleTextColor")
+               let AddItemAction = UIAlertAction(title: "Add Item", style: .default){
+                   (action) in
+                
+                
+                
+                
+                
+                
+                
+                
+        
+    }
+        AddItemAction.setValue(UIColor.black, forKey: "titleTextColor")
+                             alertcontroller.addAction(CancelAction)
+                             alertcontroller.addAction(AddItemAction)
+                             self.present(alertcontroller, animated: true, completion: nil)
+}
+    
+    
+    
+    
+    
+    
+     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+           
+        filteredData = searchText.isEmpty ? tasks! : tasks!.filter { (item: Task) -> Bool in
+                // If dataItem matches the searchText, return true to include it
+    //            return item.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+            let task = item.title
+                return task.lowercased().contains(searchText.lowercased())
+            }
+            
+            tableView.reloadData()
+        }
+        
+    
+    
+    
 }
