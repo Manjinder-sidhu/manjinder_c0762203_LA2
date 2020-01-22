@@ -12,12 +12,17 @@ import Foundation
 class Task{
     var title : String
     var days : Int
+    var count_completed_days = 0
+    var date:String
+//    var hour : String
    
     
-    init(title : String,days: Int){
+    init(title : String,days: Int,date:String){
         self.title = title
         self.days = days
-     
+               
+        self.date = date
+//        self.hour = hour
         
     }
 }

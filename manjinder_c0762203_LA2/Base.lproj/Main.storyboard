@@ -44,6 +44,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="9cf-Hw-TvV" kind="show" id="uz9-W5-7a7"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -54,10 +57,16 @@
                     <toolbarItems>
                         <barButtonItem title="Sort by title" id="s6D-wt-Y8h">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="Sort_title:" destination="v4O-Kp-OFe" id="cfG-sB-TLO"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="Dls-Or-pGQ"/>
                         <barButtonItem title="Sort by date/time " id="pUl-Yo-bA3">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="sort_Datetime:" destination="v4O-Kp-OFe" id="lHa-8l-czf"/>
+                            </connections>
                         </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="ng3-1r-8G7">
@@ -165,4 +174,7 @@
             <point key="canvasLocation" x="178.2608695652174" y="90.401785714285708"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="uz9-W5-7a7"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -16,7 +16,6 @@
 		8D2C561723D5048300FFC454 /* TaskListTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2C561623D5048300FFC454 /* TaskListTableVC.swift */; };
 		8D2C561923D504B700FFC454 /* AddTaskVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2C561823D504B700FFC454 /* AddTaskVC.swift */; };
 		8D2C561B23D5050A00FFC454 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D2C561A23D5050A00FFC454 /* Task.swift */; };
-		8DEF4CEF23D653E00014F2CE /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEF4CEE23D653E00014F2CE /* TaskTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,7 +30,6 @@
 		8D2C561623D5048300FFC454 /* TaskListTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListTableVC.swift; sourceTree = "<group>"; };
 		8D2C561823D504B700FFC454 /* AddTaskVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskVC.swift; sourceTree = "<group>"; };
 		8D2C561A23D5050A00FFC454 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
-		8DEF4CEE23D653E00014F2CE /* TaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,7 +72,6 @@
 				8D2C561623D5048300FFC454 /* TaskListTableVC.swift */,
 				8D2C561823D504B700FFC454 /* AddTaskVC.swift */,
 				8D2C561A23D5050A00FFC454 /* Task.swift */,
-				8DEF4CEE23D653E00014F2CE /* TaskTableViewCell.swift */,
 			);
 			path = manjinder_c0762203_LA2;
 			sourceTree = "<group>";
@@ -150,7 +147,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8DEF4CEF23D653E00014F2CE /* TaskTableViewCell.swift in Sources */,
 				8D2C561723D5048300FFC454 /* TaskListTableVC.swift in Sources */,
 				8D2C560023D5012E00FFC454 /* AppDelegate.swift in Sources */,
 				8D2C561923D504B700FFC454 /* AddTaskVC.swift in Sources */,

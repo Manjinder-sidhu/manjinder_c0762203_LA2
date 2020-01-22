@@ -16,16 +16,18 @@ class AddTaskVC: UIViewController {
     
     var tasks : [Task]?
     weak var delegate : TaskListTableVC?
+    var task_title : String?
+    var alloted_days:String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 //        tasks = [Task]()
-        
+//        LoadCoreData()
         SaveCoreData()
 
 //               NotificationCenter.default.addObserver(self, selector: #selector(saveCoreData),name: UIApplication.willResignActiveNotification,object: nil)
                // Do any additional setup after loading the view.
-        NotificationCenter.default.addObserver(self, selector: #selector(SaveCoreData), name: UIApplication.willResignActiveNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(SaveCoreData), name: UIApplication.willResignActiveNotification, object: nil)
         
     }
     
@@ -45,35 +47,56 @@ class AddTaskVC: UIViewController {
     @IBAction func addTask(_ sender: UIBarButtonItem) {
         let title1 = textfields[0].text ?? ""
         let days1 = Int(textfields[1].text ?? "0") ?? 0
-                   
+        //
+        
+        let date = Date()
+        let format = DateFormatter()
+        format.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let formattedDate = format.string(from: date) 
+        print(formattedDate)
+
+        let task = Task(title: title1, days: days1, date: formattedDate)
+        
+        if tasks != nil && delegate?.curIndex == -1{
+              
+              
+              tasks?.append(task)
+                         for textField in textfields {
+                             textField.text = ""
+                             textField.resignFirstResponder()
+                         }
+          }
+        else if delegate?.curIndex != -1 && tasks != nil{
+              
+              tasks![delegate!.curIndex].title = title1
+              tasks![delegate!.curIndex].days = days1
+              
+              let indexPath = IndexPath(item: delegate!.curIndex, section: 0)
+              delegate?.tableView.reloadRows(at: [indexPath], with: .none)
+              delegate?.curIndex = -1
+            
+            for textfield in textfields{
+                textfield.text = ""
+                textfield.resignFirstResponder()
                 
-        let task = Task(title: title1, days: days1)
-        tasks?.append(task)
+            }
+              
+          }
         
-                   for textField in textfields {
-                        textField.text = ""
-                       textField.resignFirstResponder()
-                   }
+    }
         
-        print(title1)
-        print(days1)
-        print("\(tasks)*******")
-               }
+    
     
     
     override func viewWillDisappear(_ animated: Bool) {
             //delegate?.tableView.reloadData()
         delegate?.updateArray(taskArray: tasks!)
-        print("\(tasks)~~~~~~~~~~~~~~~~~~@!")
-    //        print(tasks!.count)
+//        print("\(tasks)~~~~~~~~~~~~~~~~~~@!")
+   
         }
-        
-//               override func prepare(for segue:UIStoryboardSegue, sender : Any?){
-//                   if let TaskTable = segue.destination as? TaskListTableVC {
-//                    TaskTable.tasks = self.tasks
-////                    print(TaskTable.tasks!)
-//                   }
-//                }
+
+    
+    
 
     
     @objc func SaveCoreData(){
@@ -90,7 +113,8 @@ class AddTaskVC: UIViewController {
             let taskEntity = NSEntityDescription.insertNewObject(forEntityName: "TaskModal", into: ManagedContext)
            taskEntity.setValue(task.title, forKey: "title")
            taskEntity.setValue(task.days, forKey: "days")
-
+            taskEntity.setValue(task.date, forKey: "date")
+           
 
             //save  context
             do{
@@ -105,6 +129,12 @@ class AddTaskVC: UIViewController {
          LoadCoreData()
     }
 
+    
+    
+    
+    
+    //load core data
+    
     func LoadCoreData(){
 
         tasks = [Task]()
@@ -123,9 +153,11 @@ class AddTaskVC: UIViewController {
                     let title = result.value(forKey:"title") as! String
 
                     let days = result.value(forKey: "days") as! Int
+                    let date = result.value(forKey: "date")  as! String
+               
 
 
-                    tasks?.append(Task(title: title, days: days))
+                    tasks?.append(Task(title: title, days: days,date: date))
 
                 }
             }
@@ -137,6 +169,9 @@ class AddTaskVC: UIViewController {
     }
 
 
+    
+    //clear core data
+    
     func clearCoreData(){
      //create an instance of app delegate
      let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -168,70 +203,6 @@ class AddTaskVC: UIViewController {
     
     
     
-    //files
-    
-//    func getFilepath() -> String{
-//               let documantPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
-//               if documantPath.count > 0 {
-//                   let documentDirectory = documantPath[0]
-//                   let filepath = documentDirectory.appending("/taskdata.txt")
-//                   return filepath
-//               }
-//               return ""
-//
-//           }
-//
-//           func loadData(){
-//               let filepath = getFilepath()
-//
-//            tasks = [Task]()
-//               if FileManager.default.fileExists(atPath : filepath){
-//                   do{
-//                       //extract data
-//                       let fileContents = try String(contentsOfFile:filepath)
-//                       let conentArray = fileContents.components(separatedBy:"\n")
-//                       for content in conentArray{
-//                           let  taskcontent = content.components(separatedBy:",")
-//                           if taskcontent.count == 4 {
-////                               let book = Book(title:bookcontent[0],author: bookcontent[1],pages:Int(bookcontent[2])!,year:Int(bookcontent[3])!)
-////                               books?.append(book)
-//
-//
-//                            let task = Task(title: taskcontent[0], days: Int(taskcontent[1])!)
-//                            tasks?.append(task)
-//                           }
-//                       }
-//                   }catch{
-//                       print(error)
-//                   }
-//               }
-//
-//           }
-//
-//
-//
-//
-//    @objc func saveData(){
-//            let filepath = getFilepath()
-//            var saveString = ""
-//            for task in tasks!{
-//                saveString = "\(saveString)\(task.title),\(task.days)"
-//            }
-//            //write to path
-//
-//            do{
-//
-//        try saveString.write(toFile:filepath, atomically : true , encoding : .utf8)
-//            }
-//            catch{
-//                print(error)
-//            }
-//        }
-//
-//
-//
-//
-//
     
     
     
